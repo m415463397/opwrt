@@ -1,0 +1,4 @@
+#!/bin/sh
+/etc/init.d/npc enable
+/etc/init.d/npc start
+exit 0
