@@ -8,7 +8,16 @@
 
 name: Build OpenWrt
 
-on: 
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Build target"
+        required: true
+        type: choice
+        options:
+          - x86_64
+        default: x86_64
   repository_dispatch:
 
 env:
@@ -31,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["${{ github.event.client_payload.target }}"]
+        target: ["${{ github.event.client_payload.target || inputs.target }}"]
         
     steps:
     - name: Checkout
